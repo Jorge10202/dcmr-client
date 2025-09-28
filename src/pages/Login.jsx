@@ -6,9 +6,10 @@ import { useToast } from '../contexts/ToastContext.jsx';
 export default function Login() {
   const { login } = useAuth();
   const nav = useNavigate();
+  const { show } = useToast();   
   const location = useLocation();                             
   const from = location.state?.from?.pathname || '/';    
-  const { show } = useToast();    
+  
 
   const [correo, setCorreo] = useState('');
   const [contraseña, setContraseña] = useState('');
