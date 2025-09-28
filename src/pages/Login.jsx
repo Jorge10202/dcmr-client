@@ -16,9 +16,6 @@ export default function Login() {
   const [showPwd, setShowPwd] = useState(false);
   const [err, setErr] = useState('');
   const [loading, setLoading] = useState(false); 
- 
-  useEffect(() => {
-    show('Ingresa con tu cuenta', { type: 'info' });}, []);
 
   const onSubmit = async (e) => {
     e.preventDefault();
