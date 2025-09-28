@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext.jsx';
+import { useToast } from '../contexts/ToastContext.jsx';
 
 const onlyDigits = (v) => v.replace(/\D/g, '');
 const isEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
@@ -8,6 +9,7 @@ const isEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
 export default function Register() {
   const { register } = useAuth();
   const nav = useNavigate();
+  const { show } = useToast();
 
   const [form, setForm] = useState({
     nombre: '',
@@ -46,6 +48,7 @@ export default function Register() {
         telefono: form.telefono || null,
         direccion: form.direccion?.trim() || null
       });
+      show('¡Registro Completado DCMR!', { type: 'success' });
       nav('/');
     } catch (err) {
       setErrors({ general: err?.response?.data?.error || 'No se pudo registrar' });

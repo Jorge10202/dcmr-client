@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext.jsx';
+import { useToast } from '../contexts/ToastContext.jsx';
 
 export default function Login() {
   const { login } = useAuth();
   const nav = useNavigate();
   const location = useLocation();                             
-  const from = location.state?.from?.pathname || '/';        
+  const from = location.state?.from?.pathname || '/';    
+  const { show } = useToast();    
 
   const [correo, setCorreo] = useState('');
   const [contraseña, setContraseña] = useState('');
   const [showPwd, setShowPwd] = useState(false);
   const [err, setErr] = useState('');
   const [loading, setLoading] = useState(false); 
+ 
+  useEffect(() => {
+    show('Ingresa con tu cuenta', { type: 'info' });}, []);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -20,6 +25,7 @@ export default function Login() {
     setLoading(true);
     try {
       await login(correo, contraseña);
+      show('¡Sesión iniciada!', { type: 'success' });
       nav(from, { replace: true }); 
     } catch (e) {
       setErr(e?.response?.data?.error || 'Usuario o contraseña inválidos');
