@@ -3,12 +3,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext.jsx';
 import { useCart } from '../contexts/CartContext.jsx';
 import MobileDrawer from './MobileDrawer.jsx'; 
+import { useToast } from '../components/Toast.jsx';
 
 export default function Header() {
   const [open, setOpen] = useState(false);
   const { user, logout } = useAuth();
   const { count } = useCart(); 
   const navigate = useNavigate();
+  const { show } = useToast();
+
 
   const close = () => setOpen(false);
 
@@ -46,7 +49,9 @@ export default function Header() {
           {user ? (
             <div className="user-chip">
               <span>Hola, {user.nombre?.split(' ')[0] || 'Usuario'}</span>
-              <button className="btn btn-outline" onClick={logout}>Salir</button>
+              <button
+               className="btn btn-outline"
+                onClick={() => { logout(); show('Saliste de tu Cuenta', { type: 'success' }); }}>Salir</button>
             </div>
           ) : (
             <>

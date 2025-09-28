@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext.jsx';
+import { useToast } from '../components/Toast.jsx';
 
 function Item({ to, icon, children, onClick, end }) {
   return (
@@ -16,6 +17,7 @@ function Item({ to, icon, children, onClick, end }) {
 
 export default function MobileDrawer({ open, onClose }) {
   const { user, logout } = useAuth();
+  const { show } = useToast();
 
   return (
     <>
@@ -93,7 +95,7 @@ export default function MobileDrawer({ open, onClose }) {
                 <button
                   type="button"
                   className="drawer__btn drawer__btn--outline"
-                  onClick={() => { logout?.(); onClose?.(); }}
+                  onClick={() => { logout(); show('Saliste de tu Cuenta', { type: 'success' }); onClose(); }}
                 >
                   Salir
                 </button>

@@ -1,12 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext.jsx';
+import { useToast } from './Toast.jsx';
 
 export default function UserMenu() {
   const { user, logout, isAdmin } = useAuth();
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
   const nav = useNavigate();
+  const { show } = useToast();
 
   useEffect(() => {
     const onClick = (e) => { if (open && ref.current && !ref.current.contains(e.target)) setOpen(false); };
@@ -36,7 +38,7 @@ export default function UserMenu() {
           )}
           <button
             className="usermenu-item danger"
-            onClick={() => { setOpen(false); logout(); nav('/'); }}
+            onClick={() => { logout(); show('Saliste de tu Cuenta', { type: 'success' }); }}
           >
             Salir
           </button>
