@@ -5,8 +5,7 @@ import { useToast } from '../components/Toast.jsx';
 
 export default function Login() {
   const { login } = useAuth();
-  const nav = useNavigate();
-  const { show } = useToast();   
+  const nav = useNavigate();  
   const location = useLocation();                             
   const from = location.state?.from?.pathname || '/';    
   
@@ -16,6 +15,7 @@ export default function Login() {
   const [showPwd, setShowPwd] = useState(false);
   const [err, setErr] = useState('');
   const [loading, setLoading] = useState(false); 
+  const { show } = useToast(); 
 
   const onSubmit = async (e) => {
     e.preventDefault();
