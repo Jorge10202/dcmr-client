@@ -10,7 +10,7 @@ export default function Home(){
   const [products, setProducts] = useState([]);
   const [cats, setCats] = useState([]);
   const [active, setActive] = useState('all');
-  const [banners, setBanners] = useState([]);
+  const [heroBanners, setHeroBanners] = useState([]);
   const location = useLocation();
   const navigate = useNavigate();
   const params = useParams();
@@ -60,25 +60,26 @@ export default function Home(){
     return () => { mounted = false; };
   }, []);
 
-  const heroBanners = (banners?.length ? banners : promos).map(p => ({
-  id: p.id,
-  imagen: p.imagen || p.imagen_url || p.banner || p.foto, // <= compat
-  titulo: p.titulo,
-  subtitulo: p.subtitulo,
-  enlace: p.enlace || p.link || null
-  }));
+  useEffect(() => {
+    (async () => {
+      try {
+      
+        const { data } = await api.get('', { params: { limit: 5 } });
+  
+        const items = (Array.isArray(data) ? data : []).map(p => ({
+          id: p.id,
+          titulo: p.titulo || p.title || '',
+          subtitulo: p.subtitulo || p.subtitle || '',
+          imagen: p.imagen || p.image || '',
+          enlace: p.enlace || p.link || '',
+        }));
+        setHeroBanners(items);
+      } catch (e) {
+        setHeroBanners([]); // fallback seguro
+      }
+    })();
+  }, []);
 
-   useEffect(() => {
-  let mounted = true;
-  (async () => {
-    try {
-      // Puedes reutilizar /promos o crear un /banners
-      const { data } = await api.get('', { params: { limit: 5 } });
-      if (mounted) setBanners(Array.isArray(data) ? data : []);
-    } catch { if (mounted) setBanners([]); }
-  })();
-  return () => { mounted = false; };
-}, []);
 
   const gotoCat = (val) => {
     if (!val || val === 'all') navigate('/');
