@@ -10,6 +10,7 @@ export default function Home(){
   const [products, setProducts] = useState([]);
   const [cats, setCats] = useState([]);
   const [active, setActive] = useState('all');
+  const [banners, setBanners] = useState([]);
   const location = useLocation();
   const navigate = useNavigate();
   const params = useParams();
