@@ -1342,3 +1342,75 @@ html, body { max-width: 100%; overflow-x: hidden; }
   bottom: max(96px, env(safe-area-inset-bottom));
   z-index: 1001;
 }
+
+
+.banner {
+  position: relative;
+  width: 100%;
+  height: clamp(100px, 45vw, 350px);
+  overflow: hidden;
+  border-radius: 16px;
+  background: #f5eee6;
+  margin: 12px auto 16px;
+}
+
+.banner__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .5s ease;
+  display: block;
+}
+.banner__slide.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.banner__slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.banner__caption {
+  position: absolute;
+  left: 24px; bottom: 24px;
+  background: rgba(36, 22, 18, .6);
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 10px;
+  max-width: min(720px, 90%);
+}
+.banner__caption h3 { margin: 0 0 4px; }
+.banner__caption p  { margin: 0; font-size: .95rem; }
+
+.banner__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.9);
+  box-shadow: 0 2px 8px rgba(0,0,0,.15);
+  border: none; cursor: pointer;
+  font-size: 22px; line-height: 1;
+}
+.banner__nav--prev { left: 10px; }
+.banner__nav--next { right: 10px; }
+
+.banner__dots {
+  position: absolute; left: 0; right: 0; bottom: 10px;
+  display: flex; gap: 8px; justify-content: center;
+}
+.banner__dots button {
+  width: 8px; height: 8px; border-radius: 50%;
+  border: none; background: rgba(255,255,255,.6);
+  cursor: pointer;
+}
+.banner__dots button.is-active { background: #f0b400; }
+
+
+.navbar, .site-header { position: fixed; top: 0; left: 0; right: 0; }
+.container, main { padding-top: 75px; } 
+
