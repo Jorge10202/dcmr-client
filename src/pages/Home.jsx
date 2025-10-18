@@ -60,6 +60,26 @@ export default function Home(){
     return () => { mounted = false; };
   }, []);
 
+  const heroBanners = (banners?.length ? banners : promos).map(p => ({
+  id: p.id,
+  imagen: p.imagen || p.imagen_url || p.banner || p.foto, // <= compat
+  titulo: p.titulo,
+  subtitulo: p.subtitulo,
+  enlace: p.enlace || p.link || null
+  }));
+
+   useEffect(() => {
+  let mounted = true;
+  (async () => {
+    try {
+      // Puedes reutilizar /promos o crear un /banners
+      const { data } = await api.get('/promos', { params: { limit: 5 } });
+      if (mounted) setBanners(Array.isArray(data) ? data : []);
+    } catch { if (mounted) setBanners([]); }
+  })();
+  return () => { mounted = false; };
+}, []);
+
   const gotoCat = (val) => {
     if (!val || val === 'all') navigate('/');
     else navigate(`/c/${val}`);
