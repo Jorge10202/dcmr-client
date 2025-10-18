@@ -38,7 +38,7 @@ export default function BannerSlider() {
 
     (async () => {
       try {
-        const { data } = await api.get('/promos', { params: { limit: 5 } });
+        const { data } = await api.get('', { params: { limit: 5 } });
         const arr = Array.isArray(data) ? data : [];
         if (mounted) setSlides(arr.length ? arr : DEMO_SLIDES);
       } catch {

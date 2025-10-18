@@ -73,7 +73,7 @@ export default function Home(){
   (async () => {
     try {
       // Puedes reutilizar /promos o crear un /banners
-      const { data } = await api.get('/promos', { params: { limit: 5 } });
+      const { data } = await api.get('', { params: { limit: 5 } });
       if (mounted) setBanners(Array.isArray(data) ? data : []);
     } catch { if (mounted) setBanners([]); }
   })();
@@ -104,6 +104,7 @@ export default function Home(){
   return (
     <div className="container">
     <BannerSlider items={heroBanners} interval={5000} />
+
       <section className="hero hero--top">
         <h1>Distribuidora Comercial Ramírez</h1>
         <p>Diseño, calidad y atención cercana para amueblar tu hogar con estilo y durabilidad.</p>
