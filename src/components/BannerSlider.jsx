@@ -5,16 +5,16 @@ import api from '../api';
 const DEMO_SLIDES = [
   {
     id: 'demo-1',
-    title: 'Halloween',
-    text: 'Promos de temporada 🎃',
-    image_url: 'https://res.cloudinary.com/darxqeoa6/image/upload/v1760757741/halloween_pzdenm.png',
+    title: 'Navidad',
+    text: 'Promos de temporada 🎁',
+    image_url: 'https://res.cloudinary.com/darxqeoa6/image/upload/v1763317345/promo_navi_zps7yw.png',
     link: '',
   },
   {
     id: 'demo-2',
-    title: 'Halloween',
-    text: 'Halloween a la medida ✨',
-    image_url: 'https://res.cloudinary.com/darxqeoa6/image/upload/v1760758254/promo_phkknl.png',
+    title: 'Navidad',
+    text: 'Navidad con lo mejor ✨',
+    image_url: 'https://res.cloudinary.com/darxqeoa6/image/upload/v1763317357/promo_navii_c1mvkh.png',
     link: '',
   },
   {
